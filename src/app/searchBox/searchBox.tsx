@@ -8,7 +8,7 @@ const WeatherApp = async () => {
     <div>
       temp:{res.data.main.temp}
       city: {res.data.name}
-      humidity: {res.data.main.humidity}
+      humiditdddy: {res.data.main.humidity}
     </div>
   );
 };
