@@ -1,5 +1,4 @@
 import WeatherApp from "./searchBox/searchBox";
-// import st
 
 export default function Home() {
   return (
