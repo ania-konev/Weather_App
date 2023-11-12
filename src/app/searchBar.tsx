@@ -1,10 +1,13 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
-import { AutoComplete, Input } from "antd";
+import { AutoComplete } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 
-const SearchBar: React.FC = () => {
-  const [search, setSearch] = useState("");
+const SearchBar: React.FC<{
+  search: string;
+  setSearch: any;
+  onClick: () => void;
+}> = ({ search, setSearch, onClick }) => {
   const [searchData, setSearchData] = useState<{ value: string }[]>([]);
 
   const handleChange = (e: string) => {
@@ -25,7 +28,6 @@ const SearchBar: React.FC = () => {
         return item.name.toLowerCase().startsWith(search.toLowerCase());
       })
       .map((item: any, index: any) => {
-        console.log(item);
         return { value: item.name };
       });
   };
@@ -42,9 +44,13 @@ const SearchBar: React.FC = () => {
         onSelect={onSelect}
         onChange={handleChange}
         placeholder="Search..."
-      >
-        <Input.Search size="large" />
-      </AutoComplete>
+      ></AutoComplete>
+      <Button
+        type="primary"
+        shape="circle"
+        icon={<SearchOutlined />}
+        onClick={onClick}
+      />
     </>
   );
 };
