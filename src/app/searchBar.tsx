@@ -39,6 +39,7 @@ const SearchBar: React.FC<{
   return (
     <>
       <AutoComplete
+        className="search_bar"
         options={getPanelValue()}
         style={{ width: 200 }}
         onSelect={onSelect}
@@ -46,6 +47,7 @@ const SearchBar: React.FC<{
         placeholder="Search..."
       ></AutoComplete>
       <Button
+        className="search_bar"
         type="primary"
         shape="circle"
         icon={<SearchOutlined />}
