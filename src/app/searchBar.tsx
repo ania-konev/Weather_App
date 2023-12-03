@@ -7,7 +7,8 @@ const SearchBar: React.FC<{
   search: string;
   setSearch: any;
   onClick: () => void;
-}> = ({ search, setSearch, onClick }) => {
+  onKeyDown: any;
+}> = ({ search, setSearch, onClick, onKeyDown }) => {
   const [searchData, setSearchData] = useState<{ value: string }[]>([]);
 
   const handleChange = (e: string) => {
@@ -45,6 +46,7 @@ const SearchBar: React.FC<{
         onSelect={onSelect}
         onChange={handleChange}
         placeholder="Search..."
+        onKeyDown={onKeyDown}
       ></AutoComplete>
       <Button
         className="search_bar"

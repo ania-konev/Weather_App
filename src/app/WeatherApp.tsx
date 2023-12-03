@@ -2,6 +2,7 @@ import { Col, Row } from "antd";
 import { FaDroplet as HumidityIcon } from "react-icons/fa6";
 import { FaWind } from "react-icons/fa";
 import WeatherIcons from "./weatherIcons";
+import getDate from "./getDate";
 
 const WeatherApp: React.FC<{
   res: {
@@ -18,27 +19,30 @@ const WeatherApp: React.FC<{
   } else {
     const tempInCalvin = res.data.main.temp;
     const tempInCelsius = Math.round(Number(tempInCalvin) - 273.15);
+
     return (
       <Row className="container">
         <Col span={5} className="humidity">
           <div>
             <div>
-              <HumidityIcon className="icons" /> humidity
+              <HumidityIcon className="icons" /> <br></br> humidity
             </div>
             {res.data.main.humidity}%
           </div>
         </Col>
-        <Col span={14}>
+        <Col span={14} className="middle-col">
           <div className="weather_icons">
             <WeatherIcons weather={res.data.weather[0].main} />
           </div>
           <div className="temperature">{tempInCelsius}&deg; C</div>
           <div className="city_name">{res.data.name}</div>
+          {getDate()}
         </Col>
         <Col span={5} className="wind">
           <div>
             <div className="icons">
-              <FaWind /> wind
+              <FaWind />
+              <br></br> wind
             </div>
             {res.data.wind.speed} m/s
           </div>
