@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WeatherApp from "./WeatherApp";
 import SearchBar from "./searchBar";
 import axios from "axios";
 import { Layout, Space } from "antd";
 import LoadingImage from "./loadingImage";
 import BackgroundImage from "./backgroundImage";
+import HelpPage from "./helpPage";
 
 const { Header, Content } = Layout;
 
@@ -14,6 +15,7 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [backgroundChange, setBackgroundChange] = useState(false);
+  const [isHelpHidden, setIsHelpHidden] = useState(false);
 
   const [res, setRes] = useState<{
     data: {
@@ -26,6 +28,7 @@ export default function Home() {
 
   const handleClick = () => {
     setLoading(true);
+    setIsHelpHidden(true);
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
     setBackgroundChange(true);
@@ -40,6 +43,22 @@ export default function Home() {
       handleClick();
     }
   };
+
+  const [hasMounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  //  to mount SearchBar component before creating HelpPage component
+
+  const content = isHelpHidden ? (
+    <>
+      <WeatherApp res={res} />
+      <LoadingImage loading={loading} />
+    </>
+  ) : (
+    <>{hasMounted && <HelpPage />}</>
+  );
 
   return (
     <div>
@@ -59,8 +78,7 @@ export default function Home() {
           />
         </Header>
         <Content className="content">
-          <WeatherApp res={res} />
-          <LoadingImage loading={loading} />
+          {content}
           {/* gdzie on sie znajduje */}
         </Content>
         {/* <Footer className="footer">{currentDate}</Footer> */}

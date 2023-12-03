@@ -110,3 +110,14 @@ body {
   display: flex;
   justify-content: center;
 }
+
+/* .tip_notes {
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  background: #0c1d2b;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
