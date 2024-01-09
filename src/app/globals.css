@@ -9,16 +9,20 @@
   background-color: transparent;
 }
 
+@media only screen and (max-width: 600px) {
+  .layout {
+    width: 100%;
+    right: 0;
+    bottom: 20vh;
+  }
+}
+
 body {
   overflow: hidden;
   height: 100%;
   margin: 0;
   padding: 0;
 }
-/* .space {
-  margin-left: 28%;
-  margin-top: 3%;
-} */
 
 .header {
   display: flex;
@@ -100,24 +104,24 @@ body {
   color: rgba(24, 80, 236, 0.633);
 }
 
-.footer,
 .content,
 .header {
   background-color: rgba(183, 208, 208, 0.5);
 }
 
-.footer {
-  display: flex;
-  justify-content: center;
+.help_message {
+  text-align: center;
+  margin-top: 100px;
+  font-size: x-large;
 }
 
-/* .tip_notes {
-  border: 1px solid black;
-  width: 100px;
-  height: 100px;
-  background: #0c1d2b;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+.license_note {
+  position: absolute;
+  bottom: 10px;
+  left: 16px;
+  color: aliceblue;
+}
+
+a {
+  color: blanchedalmond;
+}

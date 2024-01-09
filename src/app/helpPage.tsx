@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
-import Joyride, { Step, STATUS } from "react-joyride";
+import { useState } from "react";
+import Joyride, { Step } from "react-joyride";
 
 const HelpPage = () => {
   const [{ run, steps }, setState] = useState<{
@@ -35,18 +35,21 @@ const HelpPage = () => {
   });
 
   return (
-    <Joyride
-      run={run}
-      steps={steps}
-      hideCloseButton
-      scrollToFirstStep
-      showSkipButton
-      showProgress
-    />
+    <div className="help_message">
+      <strong>Welcome in a Weather Application Website!</strong> <br />
+      <i>
+        Enter city name and click on the "search" button to check the weather.
+      </i>
+      <Joyride
+        run={run}
+        steps={steps}
+        hideCloseButton
+        scrollToFirstStep
+        showSkipButton
+        showProgress
+      />
+    </div>
   );
 };
 
 export default HelpPage;
-
-// This is a Weather Application Website. Enter the name of the city you want
-// to check the weather for and click enter or the "search" button.

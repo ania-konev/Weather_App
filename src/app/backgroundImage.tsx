@@ -7,7 +7,9 @@ const BackgroundImage: React.FC<{
   backgroundChange: boolean;
   setBackgroundChange: Dispatch<SetStateAction<boolean>>;
 }> = ({ search, backgroundChange, setBackgroundChange }) => {
-  const [backgroundUrl, setBackgroundUrl] = useState("/background_image.jpg");
+  const [backgroundUrl, setBackgroundUrl] = useState(
+    "/golden_gate-unsplash.jpg"
+  );
 
   const unsplash = createApi({
     accessKey: "4ITKdSSv06TlWBKZsyA8Qvctw3QeUXk0zCT-13icG0I",
@@ -17,8 +19,6 @@ const BackgroundImage: React.FC<{
   useEffect(() => {
     if (backgroundChange) {
       unsplash.photos.getRandom({ query: search, count: 1 }).then((result) => {
-        console.log(result);
-
         if (result.response === undefined) {
           console.warn("Undefined response from photos api");
           return;
@@ -36,8 +36,6 @@ const BackgroundImage: React.FC<{
       alt="Image of the city"
       sizes="100vw"
       style={{
-        // zIndex: -1,
-        // objectFit: "cover",
         width: "100vw",
         height: "100vh",
         margin: "0",

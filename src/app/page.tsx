@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import WeatherApp from "./WeatherApp";
 import SearchBar from "./searchBar";
 import axios from "axios";
-import { Layout, Space } from "antd";
+import { Layout } from "antd";
 import LoadingImage from "./loadingImage";
 import BackgroundImage from "./backgroundImage";
 import HelpPage from "./helpPage";
@@ -67,7 +67,6 @@ export default function Home() {
         backgroundChange={backgroundChange}
         setBackgroundChange={setBackgroundChange}
       ></BackgroundImage>
-      {/* <Space className="space" direction="vertical" size="small"> */}
       <Layout className="layout">
         <Header className="header">
           <SearchBar
@@ -77,13 +76,29 @@ export default function Home() {
             onKeyDown={handleKeyDown}
           />
         </Header>
-        <Content className="content">
-          {content}
-          {/* gdzie on sie znajduje */}
-        </Content>
-        {/* <Footer className="footer">{currentDate}</Footer> */}
+        <Content className="content">{content}</Content>
       </Layout>
-      {/* </Space> */}
+      <div className="license_note">
+        <strong>
+          *All{" "}
+          <a href="https://datahub.io/core/world-cities#resource-world-cities">
+            data
+          </a>{" "}
+          of the city name is licensed under the{" "}
+          <a href="https://creativecommons.org/licenses/by/3.0/">
+            Creative Common Attribution License{" "}
+          </a>
+          as is the original data from{" "}
+          <a href="https://www.geonames.org/">geonames</a>. All photos are
+          fetched from <a href="https://unsplash.com/">Unsplash.</a> Weather
+          data provided by{" "}
+          <a href="https://openweathermap.org/">OpenWeather.</a>{" "}
+          <img
+            src="https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png"
+            width="50px"
+          ></img>
+        </strong>
+      </div>
     </div>
   );
 }

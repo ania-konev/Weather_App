@@ -3,6 +3,7 @@ import { FaDroplet as HumidityIcon } from "react-icons/fa6";
 import { FaWind } from "react-icons/fa";
 import WeatherIcons from "./weatherIcons";
 import getDate from "./getDate";
+import { useState } from "react";
 
 const WeatherApp: React.FC<{
   res: {
@@ -20,6 +21,12 @@ const WeatherApp: React.FC<{
     const tempInCalvin = res.data.main.temp;
     const tempInCelsius = Math.round(Number(tempInCalvin) - 273.15);
 
+    const [changeTime, setChangeTime] = useState(getDate());
+
+    setInterval(() => {
+      setChangeTime(getDate());
+    }, 1000);
+
     return (
       <Row className="container">
         <Col span={5} className="humidity">
@@ -36,7 +43,7 @@ const WeatherApp: React.FC<{
           </div>
           <div className="temperature">{tempInCelsius}&deg; C</div>
           <div className="city_name">{res.data.name}</div>
-          {getDate()}
+          {changeTime}
         </Col>
         <Col span={5} className="wind">
           <div>
