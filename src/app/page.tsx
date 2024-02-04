@@ -1,47 +1,53 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import WeatherApp from "./WeatherApp";
+import WeatherDisplay from "./weatherDisplay";
 import SearchBar from "./searchBar";
 import axios from "axios";
-import { Layout } from "antd";
+import { Layout, message } from "antd";
 import LoadingImage from "./loadingImage";
 import BackgroundImage from "./backgroundImage";
-import HelpPage from "./helpPage";
+import HelpTutorial from "./helpTutorial";
 
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 export default function Home() {
-  const [search, setSearch] = useState("");
+  const [backgroundLoc, setBgLoc] = useState("");
   const [loading, setLoading] = useState(false);
   const [backgroundChange, setBackgroundChange] = useState(false);
   const [isHelpHidden, setIsHelpHidden] = useState(false);
 
   const [res, setRes] = useState<{
-    data: {
-      main: { temp: string; humidity: string };
-      name: string;
-      wind: { speed: string };
-      weather: Array<{ main: string }>;
-    };
+    main: { temp: string; humidity: string };
+    name: string;
+    wind: { speed: string };
+    weather: Array<{ main: string }>;
   } | null>(null);
 
-  const handleClick = () => {
-    setLoading(true);
-    setIsHelpHidden(true);
+  const [messageApi, contextHolder] = message.useMessage();
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
-    setBackgroundChange(true);
-    axios.get(url).then((value) => {
-      setRes(value);
-      setLoading(false);
+  const errorMessage = () => {
+    messageApi.open({
+      type: "error",
+      content: "City not found!",
     });
   };
 
-  const handleKeyDown = (event: any) => {
-    if (event.key === "Enter") {
-      handleClick();
-    }
+  const searchForWeather = (search: string) => {
+    setLoading(true);
+    setIsHelpHidden(true);
+    setBgLoc(search);
+    axios
+      .get("/api/?search=" + search)
+      .then((value) => {
+        setBackgroundChange(true);
+        setRes(value.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setBackgroundChange(false);
+        errorMessage();
+      });
   };
 
   const [hasMounted, setMounted] = useState(false);
@@ -51,54 +57,70 @@ export default function Home() {
   }, []);
   //  to mount SearchBar component before creating HelpPage component
 
-  const content = isHelpHidden ? (
+  const display =
+    res === null ? null : (
+      <WeatherDisplay
+        temp={res.main.temp}
+        humidity={res.main.humidity}
+        cityName={res.name}
+        windSpeed={res.wind.speed}
+        weather={res.weather[0].main}
+      />
+    );
+
+  if (loading) {
     <>
-      <WeatherApp res={res} />
-      <LoadingImage loading={loading} />
-    </>
+      <LoadingImage /> {display}{" "}
+    </>;
+  }
+
+  const content = isHelpHidden ? (
+    display
   ) : (
-    <>{hasMounted && <HelpPage />}</>
+    <>
+      {hasMounted && <HelpTutorial />} {display}
+    </>
   );
 
   return (
     <div>
+      <> {contextHolder}</>
       <BackgroundImage
-        search={search}
+        search={backgroundLoc}
         backgroundChange={backgroundChange}
         setBackgroundChange={setBackgroundChange}
       ></BackgroundImage>
-      <Layout className="layout">
-        <Header className="header">
-          <SearchBar
-            search={search}
-            setSearch={setSearch}
-            onClick={handleClick}
-            onKeyDown={handleKeyDown}
-          />
-        </Header>
-        <Content className="content">{content}</Content>
+      <Layout>
+        <Layout className="layout">
+          <Header className="header">
+            <SearchBar searchCallback={searchForWeather} />
+          </Header>
+          <Content className="content">{content}</Content>
+        </Layout>
+        <Footer>
+          <div className="license-note">
+            <strong>
+              *All{" "}
+              <a href="https://datahub.io/core/world-cities#resource-world-cities">
+                data
+              </a>{" "}
+              of the city name is licensed under the{" "}
+              <a href="https://creativecommons.org/licenses/by/3.0/">
+                Creative Common Attribution License{" "}
+              </a>
+              as is the original data from{" "}
+              <a href="https://www.geonames.org/">geonames</a>. All photos are
+              fetched from <a href="https://unsplash.com/">Unsplash.</a> Weather
+              data provided by{" "}
+              <a href="https://openweathermap.org/">OpenWeather.</a>{" "}
+              <img
+                src="https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png"
+                style={{ height: "1rem" }}
+              ></img>
+            </strong>
+          </div>
+        </Footer>
       </Layout>
-      <div className="license_note">
-        <strong>
-          *All{" "}
-          <a href="https://datahub.io/core/world-cities#resource-world-cities">
-            data
-          </a>{" "}
-          of the city name is licensed under the{" "}
-          <a href="https://creativecommons.org/licenses/by/3.0/">
-            Creative Common Attribution License{" "}
-          </a>
-          as is the original data from{" "}
-          <a href="https://www.geonames.org/">geonames</a>. All photos are
-          fetched from <a href="https://unsplash.com/">Unsplash.</a> Weather
-          data provided by{" "}
-          <a href="https://openweathermap.org/">OpenWeather.</a>{" "}
-          <img
-            src="https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png"
-            width="50px"
-          ></img>
-        </strong>
-      </div>
     </div>
   );
 }

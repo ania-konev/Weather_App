@@ -8,7 +8,7 @@ export default function getDate() {
   };
 
   return (
-    <div className="current_date">
+    <div className="current-date">
       {event.toLocaleDateString("en-US", options)}
       <br></br>
       {event.toLocaleTimeString("en-US")}

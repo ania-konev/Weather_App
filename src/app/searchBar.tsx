@@ -4,54 +4,52 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 
 const SearchBar: React.FC<{
-  search: string;
-  setSearch: any;
-  onClick: () => void;
-  onKeyDown: any;
-}> = ({ search, setSearch, onClick, onKeyDown }) => {
-  const [searchData, setSearchData] = useState<{ value: string }[]>([]);
+  searchCallback: any; // called when user wishes to search for smth with "search" input
+}> = ({ searchCallback }) => {
+  const [searchData, setSearchData] = useState<{ name: string }[]>([]);
+  const [searchInput, setSearchInput] = useState<string | null>(null);
 
   const handleChange = (e: string) => {
-    setSearch(e);
+    setSearchInput(e);
+  };
+  const onKeyDown = (event: any) => {
+    if (event.key === "Enter") {
+      if (searchInput !== null) searchCallback(searchInput);
+    }
+  };
+  const onClick = () => {
+    if (searchInput !== null) searchCallback(searchInput);
   };
 
   useEffect(() => {
-    fetch("/world_cities.json")
+    fetch("/world-cities.json")
       .then((res) => res.json())
       .then((data) => {
         setSearchData(data);
       });
   }, []);
 
-  const getPanelValue = () => {
-    return searchData
-      .filter((item: any, index: any) => {
-        return item.name.toLowerCase().startsWith(search.toLowerCase());
-      })
-      .map((item: any, index: any) => {
-        return { value: item.name };
-      });
-  };
-
-  const onSelect = (data: string) => {
-    console.log("onSelect", data);
+  const getOptionsValue = () => {
+    return searchData.map((item: { name: string }) => {
+      return { value: item.name };
+    });
   };
 
   return (
     <>
       <AutoComplete
-        className="search_bar"
-        id="search_bar"
-        options={getPanelValue()}
-        style={{ width: 200 }}
-        onSelect={onSelect}
+        className="search-bar"
+        id="search-bar"
+        options={getOptionsValue()}
+        filterOption={true}
+        style={{ width: "200px" }}
         onChange={handleChange}
         placeholder="Search..."
         onKeyDown={onKeyDown}
       ></AutoComplete>
       <Button
-        className="search_bar"
-        id="search_button"
+        className="search-bar"
+        id="search-button"
         type="primary"
         shape="circle"
         icon={<SearchOutlined />}

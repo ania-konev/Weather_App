@@ -29,7 +29,7 @@ body {
   justify-content: center;
 }
 
-.search_bar {
+.search-bar {
   margin-top: 2%;
   padding-right: 2%;
 }
@@ -38,22 +38,22 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  font-size: 20px;
+  font-size: 1.25rem;
   padding-bottom: 25px;
   text-align: center;
 }
 
-.container {
+.weather-display-container {
   width: 100%;
   height: 100%;
 }
 
 .icons {
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
-.weather_icons {
-  font-size: 200px;
+.weather-icons {
+  font-size: 12.5rem;
   display: flex;
   justify-content: center;
   padding-top: 10px;
@@ -64,7 +64,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  font-size: 20px;
+  font-size: 1.25rem;
   padding-bottom: 25px;
   text-align: center;
 }
@@ -74,7 +74,7 @@ body {
   flex-direction: column;
 }
 
-.current_date {
+.current-date {
   text-align: center;
   flex-grow: 1;
   display: flex;
@@ -86,21 +86,21 @@ body {
 .temperature {
   display: flex;
   justify-content: center;
-  font-size: 60px;
+  font-size: 3.75rem;
 }
 
-.city_name {
+.city-name {
   display: flex;
   justify-content: center;
-  font-size: 40px;
+  font-size: 2.5rem;
   padding-top: 60px;
 }
 
-.clear_sky_icon {
+.clear-sky-icon {
   color: rgb(217, 152, 32);
 }
 
-.cloud_rain_icon {
+.cloud-rain-icon {
   color: rgba(24, 80, 236, 0.633);
 }
 
@@ -109,13 +109,13 @@ body {
   background-color: rgba(183, 208, 208, 0.5);
 }
 
-.help_message {
+.help-tutorial {
   text-align: center;
   margin-top: 100px;
   font-size: x-large;
 }
 
-.license_note {
+.license-note {
   position: absolute;
   bottom: 10px;
   left: 16px;
