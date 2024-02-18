@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import axios from "axios";
-import Image from "next/image";
 
 const BackgroundImage: React.FC<{
   search: string;
@@ -22,7 +21,7 @@ const BackgroundImage: React.FC<{
   }, [backgroundChange]);
 
   return (
-    <Image
+    <img
       src={backgroundUrl}
       alt="Image of the city"
       style={{
@@ -32,7 +31,7 @@ const BackgroundImage: React.FC<{
         padding: "0",
       }}
       className="background-image"
-    ></Image>
+    ></img>
   );
 };
 

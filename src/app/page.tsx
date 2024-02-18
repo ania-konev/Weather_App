@@ -8,7 +8,6 @@ import { Layout, message } from "antd";
 import LoadingImage from "./loadingImage";
 import BackgroundImage from "./backgroundImage";
 import HelpTutorial from "./helpTutorial";
-import Image from "next/image";
 
 const { Header, Content, Footer } = Layout;
 
@@ -114,11 +113,11 @@ export default function Home() {
               fetched from <a href="https://unsplash.com/">Unsplash.</a> Weather
               data provided by{" "}
               <a href="https://openweathermap.org/">OpenWeather.</a>{" "}
-              <Image
+              <img
                 src="https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png"
                 style={{ height: "1rem" }}
                 alt="open_weather_map_logo"
-              ></Image>
+              ></img>
             </strong>
           </div>
         </Footer>
