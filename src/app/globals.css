@@ -1,5 +1,127 @@
-body {
-  background: rgb(0, 136, 255);
+.layout {
+  height: 80vh;
+  position: fixed;
+  bottom: 10vh;
+  width: 40vw;
+  right: 30vw;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
 }
 
-/* cscs */
+@media only screen and (max-width: 600px) {
+  .layout {
+    width: 100%;
+    right: 0;
+    bottom: 20vh;
+  }
+}
+
+body {
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar {
+  margin-top: 2%;
+  padding-right: 2%;
+}
+
+.humidity {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 1.25rem;
+  padding-bottom: 25px;
+  text-align: center;
+}
+
+.weather-display-container {
+  width: 100%;
+  height: 100%;
+}
+
+.icons {
+  font-size: 1.25rem;
+}
+
+.weather-icons {
+  font-size: 12.5rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  height: 45%;
+}
+
+.wind {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 1.25rem;
+  padding-bottom: 25px;
+  text-align: center;
+}
+
+.middle-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.current-date {
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 5px;
+}
+
+.temperature {
+  display: flex;
+  justify-content: center;
+  font-size: 3.75rem;
+}
+
+.city-name {
+  display: flex;
+  justify-content: center;
+  font-size: 2.5rem;
+  padding-top: 60px;
+}
+
+.clear-sky-icon {
+  color: rgb(217, 152, 32);
+}
+
+.cloud-rain-icon {
+  color: rgba(24, 80, 236, 0.633);
+}
+
+.content,
+.header {
+  background-color: rgba(183, 208, 208, 0.5);
+}
+
+.help-tutorial {
+  text-align: center;
+  margin-top: 100px;
+  font-size: x-large;
+}
+
+.license-note {
+  position: absolute;
+  bottom: 10px;
+  left: 16px;
+  color: aliceblue;
+}
+
+a {
+  color: blanchedalmond;
+}

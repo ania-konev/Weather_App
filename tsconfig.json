@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/searchBox"
+    "src/app/searchBox",
+    "weatherIconsReact.d.ts"
   ],
   "exclude": ["node_modules"]
 }
